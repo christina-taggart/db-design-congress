@@ -43,9 +43,22 @@ def list_states
   state_sens = state_sens.count.to_a
   state_num = 0
   puts
-  while state_num <= 50
+  while state_num < 50
     puts "#{state_reps[state_num][0]}: #{state_sens[state_num][1]} Senators, #{state_reps[state_num][1]} Representatives"
     state_num += 1
+  end
+end
+
+def list_totals
+  sen_count = CongressMember.where(title: "Sen").count
+  rep_count = CongressMember.where(title: "Rep").count
+  puts "\nSenators: #{sen_count}"
+  puts "Representatives: #{rep_count}"
+end
+
+def destroy_out_of_office
+  CongressMember.all.each do |congress_member|
+    congress_member.destroy if congress_member.in_office != 1
   end
 end
 
@@ -54,3 +67,7 @@ find_by_state("OH")
 find_by_gender("F")
 find_by_gender("M")
 list_states
+list_totals
+destroy_out_of_office
+list_totals
+
