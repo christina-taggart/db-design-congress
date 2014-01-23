@@ -19,7 +19,13 @@ class CreateCongressMember < ActiveRecord::Migration
       col.string :website
       col.string :webform
       col.string :twitter_id
+      col.string :phone
+      col.string :fax
+      col.string :website
+      col.string :webform
+      col.string :twitter_id
       col.date :birthdate
+
     end
   end
 end
