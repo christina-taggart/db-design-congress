@@ -14,6 +14,11 @@ class CreateCongressMember < ActiveRecord::Migration
       col.integer :district
       col.binary :in_office
       col.string :gender
+      col.string :phone
+      col.string :fax
+      col.string :website
+      col.string :webform
+      col.string :twitter_id
       col.date :birthdate
     end
   end

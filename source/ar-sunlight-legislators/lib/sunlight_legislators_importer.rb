@@ -1,17 +1,33 @@
 require 'csv'
+require_relative '../app/models/congress_member'
 
 class SunlightLegislatorsImporter
-  def self.import(filename= File.dirname(__FILE__) + "/../db/data/students.csv")
+  def self.import(filename= File.dirname(__FILE__) + "/../db/data/legislators.csv")
     csv = CSV.new(File.open(filename), :headers => true)
     csv.each do |row|
-      row.each do |field, value|
-        # TODO: begin
-        raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
-        # TODO: end
+      data = row.to_a
+      data_hash = Hash[data]
+      # Scrub out fields not used in congress_member model:
+      data_hash.delete_if do |key, value|
+        key == "bioguide_id" ||
+        key == "votesmart_id" ||
+        key == "fec_id" ||
+        key == "govtrack_id" ||
+        key == "crp_id" ||
+        key == "congresspedia_url" ||
+        key == "youtube_url" ||
+        key == "facebook_id" ||
+        key == "official_rss" ||
+        key == "congress_office" ||
+        key == "senate_class"
       end
+      congress_member = CongressMember.create!(data_hash)
+      congress_member.save
     end
   end
 end
+
+SunlightLegislatorsImporter.import
 
 # IF YOU WANT TO HAVE THIS FILE RUN ON ITS OWN AND NOT BE IN THE RAKEFILE, UNCOMMENT THE BELOW
 # AND RUN THIS FILE FROM THE COMMAND LINE WITH THE PROPER ARGUMENT.
