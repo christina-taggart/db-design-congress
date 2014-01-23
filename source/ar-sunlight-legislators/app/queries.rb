@@ -7,7 +7,18 @@ require_relative 'models/congress_member'
 
 def find_by_state(state)
   results = CongressMember.where(state: state).order(:last_name)
-  results.each { |congress_member| puts congress_member }
+  puts "#{state} Senators:"
+  results.each do |congress_member|
+    if congress_member.title == "Sen"
+      puts "#{congress_member.first_name} #{congress_member.last_name} (#{congress_member.party})"
+    end
+  end
+  puts "\n#{state} Representatives:"
+  results.each do |congress_member|
+    if congress_member.title == "Rep"
+      puts "#{congress_member.first_name} #{congress_member.last_name} (#{congress_member.party})"
+    end
+  end
 end
 
 #-----DRIVERS-----
