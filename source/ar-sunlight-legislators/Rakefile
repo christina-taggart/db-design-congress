@@ -1,6 +1,8 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require_relative './lib/sunlight_legislators_importer'
 require_relative 'db/config'
+
 
 
 desc "create the database"
@@ -47,7 +49,7 @@ end
 
 desc "populate the test database with sample data"
 task "db:populate" do
-  StudentsImporter.import
+  SunlightLegislatorsImporter.import
 end
 
 desc 'Retrieves the current schema version number'

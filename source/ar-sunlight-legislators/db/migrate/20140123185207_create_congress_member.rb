@@ -1,7 +1,7 @@
 require_relative '../config'
 
-class CreateCongressMembers < ActiveRecord::Migration
-  def self.change
+class CreateCongressMember < ActiveRecord::Migration
+  def change
     create_table :congress_members do |col|
       col.string :title
       col.string :first_name
