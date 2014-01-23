@@ -5,7 +5,7 @@ require_relative "../app/models/senator"
 class SunlightLegislatorsImporter
 
   def self.generate_attr(row_hash)
-    name = "#{row_hash[:firstname]}, #{row_hash[:middlename]}, #{row_hash[:lastname]}"
+    name = "#{row_hash[:firstname]}#{row_hash[:middlename]} #{row_hash[:lastname]}"
     birthday = Date.strptime(row_hash[:birthdate], "%m/%d/%Y")
     attributes = {name: name, phone: row_hash[:phone], fax: row_hash[:fax],
       website: row_hash[:website], webform: row_hash[:webform],
@@ -23,7 +23,7 @@ class SunlightLegislatorsImporter
       end
       if row_hash[:title] == "Rep"
         Representative.create!(generate_attr(row_hash))
-      else
+      elsif row_hash[:title] == "Sen"
         Senator.create!(generate_attr(row_hash))
       end
     end
