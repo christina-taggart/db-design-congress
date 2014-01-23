@@ -22,7 +22,6 @@ task "db:migrate" do
   end
 end
 
-
 desc "create an ActiveRecord migration in ./db/migrate"
 task "db:create_migration" do
   name = ENV['NAME']
