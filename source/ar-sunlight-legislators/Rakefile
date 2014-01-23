@@ -36,12 +36,10 @@ task "db:create_migration" do
   FileUtils.mkdir_p(migrations_dir)
 
   open(File.join(migrations_dir, filename), 'w') do |f|
-    f << (<<-EOS).gsub("      ", "")
-    class #{migration_name} < ActiveRecord::Migration
-      def self.change
-      end
-    end
-    EOS
+    f << "class #{migration_name} < ActiveRecord::Migration\n"
+    f << "  def change\n"
+    f << "  end\n"
+    f << "end\n"
   end
 end
 
