@@ -1,6 +1,7 @@
 require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
+require_relative 'lib/mock_console'
 
 
 desc "create the database"
@@ -38,7 +39,7 @@ task "db:create_migration" do
   open(File.join(migrations_dir, filename), 'w') do |f|
     f << (<<-EOS).gsub("      ", "")
     class #{migration_name} < ActiveRecord::Migration
-      def self.change
+      def change
       end
     end
     EOS
@@ -47,12 +48,17 @@ end
 
 desc "populate the test database with sample data"
 task "db:populate" do
-  StudentsImporter.import
+ SunlightLegislatorsImporter.import
 end
 
 desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
+end
+
+desc "mock console"
+task "console" do
+  MockConsole.start
 end
 
 desc "Run the specs"
