@@ -21,5 +21,36 @@ def find_by_state(state)
   end
 end
 
+
+def find_by_gender(gender)
+  sen_count = CongressMember.where(gender: gender).where(in_office: 1).where(title: "Sen").count
+  rep_count = CongressMember.where(gender: gender).where(in_office: 1).where(title: "Rep").count
+  sen_percentage =  ((sen_count.to_f / 100) * 100).floor
+  rep_percentage =  ((rep_count.to_f / CongressMember.where(title: "Rep").where(in_office: 1).count.to_f) * 100).floor
+  if gender == "M"
+    gender_string = "Male"
+  elsif gender == "F"
+    gender_string = "Female"
+  end
+  puts "\nThere are #{sen_count} (#{sen_percentage}%) #{gender_string} Senators"
+  puts "There are #{rep_count} (#{rep_percentage}%) #{gender_string} Representatives"
+end
+
+def list_states
+  state_reps = CongressMember.where(in_office: 1).where(title: "Rep").group(:state)
+  state_sens = CongressMember.where(in_office: 1).where(title: "Sen").group(:state)
+  state_reps = state_reps.count.to_a
+  state_sens = state_sens.count.to_a
+  state_num = 0
+  puts
+  while state_num <= 50
+    puts "#{state_reps[state_num][0]}: #{state_sens[state_num][1]} Senators, #{state_reps[state_num][1]} Representatives"
+    state_num += 1
+  end
+end
+
 #-----DRIVERS-----
 find_by_state("OH")
+find_by_gender("F")
+find_by_gender("M")
+list_states
