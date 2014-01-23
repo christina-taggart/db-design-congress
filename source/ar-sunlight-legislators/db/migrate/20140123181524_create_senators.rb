@@ -12,8 +12,8 @@ class CreateSenators < ActiveRecord::Migration
       t.date   :birthday
       t.string :twitter_id
       t.integer :active
-      t.integer :party_id
-      t.integer :state_id
+      t.string :party
+      t.string :state
 
       t.timestamps
     end
