@@ -1,6 +1,5 @@
 require 'rake'
 require 'rspec/core/rake_task'
-require_relative './lib/sunlight_legislators_importer'
 require_relative 'db/config'
 
 
@@ -49,6 +48,7 @@ end
 
 desc "populate the test database with sample data"
 task "db:populate" do
+  require_relative './lib/sunlight_legislators_importer'
   SunlightLegislatorsImporter.import
 end
 
