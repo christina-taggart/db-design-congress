@@ -4,10 +4,9 @@ class CreateLegislators < ActiveRecord::Migration
   def change
     create_table :legislators do |t|
       t.string :title, :name, :party, :state, :phone, :fax, :website,
-               :gender, :twitter_id
+               :gender, :twitter_id, :lastname
       t.date :birthdate
       t.boolean :in_office
-      # t.string :fec_id
       t.timestamps
     end
   end

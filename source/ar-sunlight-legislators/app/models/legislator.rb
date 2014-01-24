@@ -1,8 +1,8 @@
 require_relative '../../db/config'
 
 class Legislator < ActiveRecord::Base
-    validates :name, :title, :party, :state, :phone, presence: true
-    validates :phone, :fax, length: {is: 10}
+    validates :name, :title, :party, :state, :phone, :lastname, presence: true
+    validates :phone, :fax, length: { is: 10 }
     I18n.enforce_available_locales = false
 
     def initialize(args)
