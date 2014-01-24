@@ -68,4 +68,15 @@ class Legislator < ActiveRecord::Base
   end
 end
 
-Legislator.delete_not_in_office
+class Representative < Legislator
+end
+
+class Senator < Legislator #has senate class, district either junior or senior seat
+end
+
+class Delegate < Legislator # district == 0, no senate_class
+end
+
+
+# class Tweet
+# end
