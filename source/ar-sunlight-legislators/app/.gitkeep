@@ -1,0 +1,2 @@
+require
+legislator = CongressMember.first
