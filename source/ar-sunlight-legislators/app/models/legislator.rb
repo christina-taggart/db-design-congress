@@ -59,4 +59,15 @@ class Legislator < ActiveRecord::Base
   def self.delete_inactives
     self.where(:in_office => 0).destroy_all
   end
+
+  def self.export_tweet_ids
+    twitter_active = self.where.not(twitter_id: "")
+    twitter_ids = twitter_active.select('id, twitter_id')
+    File.open('tweets.csv', 'w') do |f|
+      f.puts "legislator_id, tweet_id"
+      twitter_ids.each do |tweet|
+        f.puts "#{tweet[:id]},#{tweet[:twitter_id]}"
+      end
+    end
+  end
 end

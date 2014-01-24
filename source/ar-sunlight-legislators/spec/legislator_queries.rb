@@ -6,3 +6,12 @@ require_relative '../app/models/legislator'
 # Legislator.delete_inactives
 # Legislator.get_all
 
+
+
+
+
+
+
+
+
+
