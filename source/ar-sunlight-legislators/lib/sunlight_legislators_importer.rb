@@ -33,7 +33,7 @@ class SunlightLegislatorsImporter
         else
           new_politician =Politician.create(office_name: line[0], first_name: line[1], last_name: line[3],
                              state: State.where('state_abbr = ?', line[7])[0], gender: line[10],
-                             party: Party.where('party_name = ?', line[6])[0] )
+                             party: Party.where('party_name = ?', line[6])[0], is_active: line[9] )
           Contact.create(politician: new_politician, phone: line[11], fax: line[12] , website: line[13], webform: line[14], twitter_name: line[21])
 
         end
