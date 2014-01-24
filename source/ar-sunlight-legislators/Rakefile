@@ -47,6 +47,8 @@ end
 
 desc "populate the test database with sample data"
 task "db:populate" do
+  require_relative 'lib/sunlight_legislators_importer'
+  require_relative '../db/legislators.csv'
   SunlightLegislatorsImporter.import
 end
 
